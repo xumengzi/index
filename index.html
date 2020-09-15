@@ -1,0 +1,478 @@
+<html>
+
+<head>
+	<title>作品展示</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<meta name="description" content="HTML examples">
+	<meta name="keywords" content="HTML,CSS,JavaScript">
+	<meta name="author" content="xumeng">
+	<link rel="shortcut icon" type="image/x-icon" href="./xu_icon_40.ico" media="screen" />
+	<style>
+		body {
+			padding: 0;
+			margin: 0;
+		}
+
+		.xui_full_page {
+			width: 100%;
+			height: 100%;
+			position: fixed;
+		}
+
+		.xui_full_page>div {
+			display: -webkit-box;
+			display: -ms-flexbox;
+			display: flex;
+			flex-direction: column;
+			-webkit-box-pack: center;
+			-ms-flex-pack: center;
+			justify-content: center;
+			-webkit-box-align: center;
+			-ms-flex-align: center;
+			align-items: center;
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			-webkit-transition: 1s ease;
+			transition: 1s ease;
+			overflow: hidden;
+		}
+
+		.xui_full_page .xui_page::after {
+			content: attr(data-page);
+			position: absolute;
+			right: 10%;
+			top: 20%;
+			-webkit-transform: translateY(-50%);
+			transform: translateY(-50%);
+			font-size: 14px;
+			border-radius: 50%;
+			padding: .2em;
+		}
+
+		#fullPage {
+			font-size: 40px;
+			color: #fff;
+		}
+
+		.beautyCss3 {
+			position: relative;
+			text-align: center;
+			display: inline-block;
+			overflow: hidden;
+			box-sizing: border-box;
+			padding: 14px 62px;
+			margin: .57em;
+			font-size: 1em;
+			line-height: 1.4;
+			white-space: nowrap;
+			outline: none;
+			background: none;
+			-webkit-transition: all .3s;
+			transition: all .3s;
+			z-index: 100;
+		}
+
+		.sideToCenter::before,
+		.sideToCenter::after {
+			width: 50%;
+			height: 100%;
+			position: absolute;
+			top: 0px;
+			line-height: 220%;
+			display: block;
+			color: #fff;
+			background: rgba(0, 0, 0, .7);
+			transition: .4s ease;
+			z-index: 99;
+			font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+		}
+
+		.sideToCenter::before {
+			content: attr(data-title-left);
+			left: -50%;
+			text-align: right;
+		}
+
+		.sideToCenter:hover::before {
+			transform: translateX(100%);
+		}
+
+		.sideToCenter::after {
+			content: attr(data-title-right);
+			right: -50%;
+			text-align: left;
+		}
+
+		.sideToCenter:hover::after {
+			transform: translateX(-100%);
+		}
+
+		.centerToSide {
+			border-color: transparent;
+		}
+
+		.centerToSide::before {
+			width: 0%;
+			height: 0%;
+			position: absolute;
+			bottom: 0%;
+			left: 50%;
+			color: #fff;
+			line-height: 220%;
+			transition: .4s ease;
+			border-bottom: 2px #fff solid;
+			z-index: 99;
+		}
+
+		.centerToSide::before {
+			content: attr(data-title);
+		}
+
+		.centerToSide:hover::before {
+			width: 100%;
+			left: 0%;
+		}
+
+		.leftInRightOut {
+			border-color: transparent;
+		}
+
+		.leftInRightOut::before {
+			width: 100%;
+			height: 0%;
+			position: absolute;
+			bottom: 0%;
+			left: 0%;
+			color: #fff;
+			line-height: 220%;
+			transition: transform .4s ease;
+			border-bottom: 2px #fff solid;
+			transform: scaleX(0);
+			transform-origin: 100% 0;
+			z-index: 99;
+		}
+
+		.leftInRightOut::before {
+			content: attr(data-title);
+		}
+
+		.leftInRightOut:hover::before {
+			transform: scaleX(1);
+			transform-origin: 0 0;
+		}
+
+		.borderToRight {
+			border-color: transparent;
+		}
+
+		.borderToRight::before {
+			width: 0%;
+			height: 0%;
+			position: absolute;
+			bottom: 0%;
+			left: 0%;
+			color: #fff;
+			line-height: 220%;
+			transition: .4s ease;
+			border-bottom: 2px #fff solid;
+			z-index: 99;
+		}
+
+		.borderToRight::before {
+			content: attr(data-title);
+		}
+
+		.borderToRight:hover::before {
+			width: 100%;
+		}
+
+		.leftToRight::before {
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			left: 0;
+			top: 0;
+			color: #fff;
+			line-height: 220%;
+			background: rgba(0, 0, 0, .7);
+			transition: .4s ease;
+			z-index: 99;
+			transform: translateX(-100%);
+		}
+
+		.leftToRight::before {
+			content: attr(data-title);
+		}
+
+		.leftToRight:hover::before {
+			transform: translateX(0);
+		}
+	</style>
+	<style type="text/css">
+		#fullPage a {
+			color: #fff;
+			/* text-decoration: none; */
+		}
+
+		.description {
+			display: flex;
+			align-items: center;
+		}
+
+		.description .content {
+			display: flex;
+			flex-direction: column;
+		}
+
+		.description .content p {
+			font-size: 26px;
+			margin: 10px 0;
+			text-align: left;
+		}
+
+		code {
+			padding: .2em;
+			margin: 0;
+			font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+			direction: ltr;
+		}
+
+		@media screen and (max-width: 600px) {
+			#fullPage a {
+				font-size: 34px;
+			}
+
+			.description {
+				flex-direction: column;
+			}
+		}
+
+		.description .content p {
+			text-align: center;
+			font-size: 24px;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="fullPage" class="xui_full_page">
+		<div>
+			<div class="description">
+				<a class="beautyCss3 sideToCenter" data-title-left="Xui" data-title-right="&nbsp;Js"
+					href="https://www.xumeng.ink/book/" target="_blank"><code>XuiJs</code></a>
+				<div class="content">
+					<p class="beautyCss3 centerToSide">基于原生<code>JS</code></p>
+					<p class="beautyCss3 centerToSide">可以提供丰富的</p>
+					<p class="beautyCss3 centerToSide">方法,组件,插件的组件库</p>
+				</div>
+			</div>
+		</div>
+		<div>
+			<div class="description">
+				<a class="beautyCss3 sideToCenter" data-title-left="Xui" data-title-right="vue"
+					href="https://xumengzi.github.io/xui-vue/book/index.html#/" target="_blank"><code>Xui-vue</code></a>
+				<div class="content">
+					<p class="beautyCss3 leftInRightOut">基于<code>vuejs2.0</code></p>
+					<p class="beautyCss3 leftInRightOut">可以提供丰富的</p>
+					<p class="beautyCss3 leftInRightOut">方法,组件,插件的组件库</p>
+				</div>
+			</div>
+		</div>
+		<div>
+			<div class="description">
+				<a class="beautyCss3 sideToCenter" data-title-left="Xui" data-title-right="btns"
+					href="https://xumengzi.github.io/beautyCss3Buttons/Css3Buttons.html" target="_blank"><code>Xui-btns</code></a>
+				<div class="content">
+					<p class="beautyCss3 borderToRight">基于<code>css3</code></p>
+					<p class="beautyCss3 borderToRight">可以提供各种动画效果的</p>
+					<p class="beautyCss3 borderToRight">按钮库</p>
+				</div>
+			</div>
+		</div>
+		<div>
+			<div class="description">
+				<a class="beautyCss3 sideToCenter" data-title-left="selec" data-title-right="tedJs"
+					href="https://www.xumeng.ink/book/" target="_blank"><code>selectedJs</code></a>
+				<div class="content">
+					<p class="beautyCss3 centerToSide">基于原生<code>JS</code></p>
+					<p class="beautyCss3 centerToSide">轻量级, 兼容性好, 配置简单</p>
+					<p class="beautyCss3 centerToSide">选择并去搜索的组件库</p>
+				</div>
+			</div>
+		</div>
+		<div>
+			<div class="description">
+				<a class="beautyCss3 leftToRight" data-title="Anti-Hundred-Poison"
+					href="https://github.com/xumengzi/Anti-Hundred-Poison" target="_blank"><code>Anti-Hundred-Poison</code></a>
+				<div class="content">
+					<p class="beautyCss3 leftInRightOut">基于原生<code>JS</code></p>
+					<p class="beautyCss3 leftInRightOut">可以屏蔽百度相关广告以及百家号</p>
+					<p class="beautyCss3 leftInRightOut">的谷歌插件</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		; (function (w) {
+			function FullPage() {
+				let args = arguments[0];
+				const defaults = {
+					currentPage: 0,
+					direction: 'Y',
+					isShowDot: true,
+					isBackground: true,
+					distance: 60,
+					transition: '1s ease',
+					colorArr: [
+						'rgb(200,200,169)',
+						'rgb(203, 12, 249)',
+						'rgb(131,175,155)',
+						'rgb(6,157,128)',
+						'rgb(252,157,154)',
+						'rgb(229,187,129)',
+						'rgb(227,160,93)',
+						'rgba(241, 77, 159, 0.75)',
+						'rgba(228, 101, 243, 0.75)',
+						'rgba(137, 101, 243, 0.6)',
+						'rgba(253, 133, 182, 0.7)',
+					],
+				};
+				this.obj = Object.assign({}, defaults, args);
+				if (!this.obj.id) {
+					throw new Error("element'id is required");
+				};
+				page.config = this.obj;
+				page.config.list = document.getElementById(page.config.id).children;
+				if (!page.config.list.length) {
+					throw new Error('nothing aha ?');
+				};
+				page.init();
+			};
+			const page = {
+				config: {},
+				event(e) {
+					let tar = this.getParentEle(e);
+					if (tar.classList.contains('xui_page')) {
+						let dir = e.deltaY > 0 ? '1' : '-1';
+						this.move(tar, dir);
+					};
+				},
+				move(tar, direction) {
+					let sty = tar.style,
+						prevEle = tar.previousElementSibling,
+						prev = prevEle && prevEle.style,
+						nextEle = tar.nextElementSibling,
+						next = nextEle && nextEle.style,
+						dir = this.config.direction;
+					if (direction == 1) {
+						if (tar.nextElementSibling && sty.transform == `translate${dir}(0%)`) {
+							sty.transform = `translate${dir}(-100%)`;
+							sty.webkitTransform = `translate${dir}(-100%)`;
+							next.transform = `translate${dir}(0%)`;
+							next.webkitTransform = `translate${dir}(0%)`;
+							next.mozTransform = `translate${dir}(0%)`;
+							next.transition = this.config.transition;
+							next.webkitTransition = this.config.transition;
+							nextEle && nextEle.classList.add('show_animation');
+							tar && tar.classList.remove('show_animation');
+							this.config.fn && this.config.fn(tar, tar.nextElementSibling);
+						};
+					} else {
+						if (tar.previousElementSibling && sty.transform == `translate${dir}(0%)`) {
+							sty.transform = `translate${dir}(100%)`;
+							sty.webkitTransform = `translate${dir}(100%)`;
+							prev.transform = `translate${dir}(0%)`;
+							prev.webkitTransform = `translate${dir}(0%)`;
+							prev.mozTransform = `translate${dir}(0%)`;
+							prev.transition = this.config.transition;
+							prev.webkitTransition = this.config.transition;
+							prevEle && prevEle.classList.add('show_animation');
+							tar && tar.classList.remove('show_animation');
+							this.config.fn && this.config.fn(tar, tar.previousElementSibling);
+						};
+					};
+					sty.transition = this.config.transition;
+					sty.webkitTransition = this.config.transition;
+				},
+				getParentEle(e) {
+					let child = e.target;
+					let i = 0;
+					while (!child.classList.contains('xui_page')) {
+						i++;
+						child = child.parentElement;
+						if (i++ > 10) {
+							return false;
+						}
+					};
+					return child;
+				},
+				isMobile() {
+					return 'ontouchstart' in window;
+				},
+				randomNum(min, max) {
+					if (typeof min == 'number' && typeof max == 'number' && max > min) {
+						return Math.round(Math.random() * (max - min) + min);
+					} else {
+						throw new Error('must be two numbers or in right order');
+					};
+				},
+				init() {
+					let tar = document.getElementById(this.config.id);
+					let ele = tar.children, dir = this.config.direction;
+					let fst = this.config.currentPage;
+					for (let i = 0; i < ele.length; i++) {
+						ele[i].classList.add('xui_page'); //some options 
+						let arr = this.config.colorArr;
+						this.config.isBackground && arr.length && (ele[i].style.background = arr[this.randomNum(0, arr.length - 1)]);
+						this.config.isShowDot && ele[i].setAttribute('data-page', `${i + 1}/${ele.length}`); if (i < fst) {
+							ele[i].style.transform = `translate${dir}(-100%)`;
+						} else if (i == fst) {
+							ele[i].style.transform = `translate${dir}(0%)`;
+						} else { ele[i].style.transform = `translate${dir}(100%)`; };
+					}; w.onwheel = (e) => {
+						this.event(e);
+					};
+					if (this.isMobile()) {
+						let startX = 0, endX = 0,
+							startY = 0, endY = 0;
+						tar.addEventListener('touchstart', (e) => {
+							startX = e.touches[0].pageX;
+							startY = e.touches[0].pageY;
+						});
+						tar.addEventListener('touchend', (e) => {
+							endX = e.changedTouches[0].pageX;
+							endY = e.changedTouches[0].pageY;
+							let diffX = endX - startX,
+								diffY = endY - startY;
+							let dis = this.config.distance;
+							let diff = this.config.direction == 'X' ? diffX : diffY;
+							let dir = 0;
+							let tar = this.getParentEle(e);
+							if (diff > Math.abs(dis)) {
+								dir = -1;
+								this.move(tar, dir);
+							} else if (diff < -dis) { dir = 1; this.move(tar, dir); };
+						});
+					};
+				},
+			};
+			window.FullPage = FullPage;
+		})(window);
+	</script>
+	<script type="text/javascript">
+		window.onload = function () {
+			let res = new FullPage({
+				id: 'fullPage',
+				direction: 'Y',
+				transition: '0.8s cubic-bezier(0.29, -0.74, 0.25, 1)',
+			});
+		}
+	</script>
+</body>
+
+</html>
