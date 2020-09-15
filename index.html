@@ -87,6 +87,7 @@
 			display: block;
 			color: #fff;
 			background: rgba(0, 0, 0, .7);
+			background: radial-gradient(black, transparent);
 			transition: .4s ease;
 			z-index: 99;
 			font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
@@ -200,9 +201,11 @@
 			color: #fff;
 			line-height: 220%;
 			background: rgba(0, 0, 0, .7);
+			background: radial-gradient(black, transparent);
 			transition: .4s ease;
 			z-index: 99;
 			transform: translateX(-100%);
+			font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
 		}
 
 		.leftToRight::before {
@@ -212,6 +215,77 @@
 		.leftToRight:hover::before {
 			transform: translateX(0);
 		}
+
+		.leftBotScaleRight::before {
+			width: 0%;
+			height: 0%;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			color: #fff;
+			opacity: 0;
+			line-height: 220%;
+			background: #4eb900;
+			background: radial-gradient(black, transparent);
+			transition: .4s ease;
+			z-index: 99;
+		}
+
+		.leftBotScaleRight::before {
+			content: attr(data-title);
+		}
+
+		.leftBotScaleRight:hover::before {
+			width: 100%;
+			height: 100%;
+			opacity: 1;
+		}
+
+		.horizontalRotate::before {
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+			opacity: 0;
+			color: #fff;
+			line-height: 220%;
+			background: #4eb900;
+			background: radial-gradient(black, transparent);
+			transition: .8s ease;
+			z-index: 99;
+			font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+		}
+
+		.horizontalRotate::before {
+			content: attr(data-title);
+		}
+
+		.horizontalRotate:hover::before {
+			opacity: 1;
+			transform: rotateX(360deg);
+		}
+		.centerRotateSide::before{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	color: #fff;
+	opacity: 0;
+	line-height: 220%;
+	background: #4eb900;
+	background: radial-gradient(black, transparent);
+	transition: .4s ease;
+	z-index: 99;
+}
+.centerRotateSide::before{
+	content: attr(data-title);
+}
+.centerRotateSide:hover::before{
+	opacity: 1;
+	transform: rotate(360deg);
+}
 	</style>
 	<style type="text/css">
 		#fullPage a {
@@ -244,7 +318,7 @@
 
 		@media screen and (max-width: 600px) {
 			#fullPage a {
-				font-size: 34px;
+				font-size: 32px;
 			}
 
 			.description {
@@ -264,7 +338,7 @@
 		<div>
 			<div class="description">
 				<a class="beautyCss3 sideToCenter" data-title-left="Xui" data-title-right="&nbsp;Js"
-					href="https://www.xumeng.ink/book/" target="_blank"><code>XuiJs</code></a>
+					href="https://www.xumeng.ink/book/" target="_blank"><code>Xui&nbsp;Js</code></a>
 				<div class="content">
 					<p class="beautyCss3 centerToSide">基于原生<code>JS</code></p>
 					<p class="beautyCss3 centerToSide">可以提供丰富的</p>
@@ -274,7 +348,7 @@
 		</div>
 		<div>
 			<div class="description">
-				<a class="beautyCss3 sideToCenter" data-title-left="Xui" data-title-right="vue"
+				<a class="beautyCss3 leftBotScaleRight" data-title="Xui-vue"
 					href="https://xumengzi.github.io/xui-vue/book/index.html#/" target="_blank"><code>Xui-vue</code></a>
 				<div class="content">
 					<p class="beautyCss3 leftInRightOut">基于<code>vuejs2.0</code></p>
@@ -285,7 +359,7 @@
 		</div>
 		<div>
 			<div class="description">
-				<a class="beautyCss3 sideToCenter" data-title-left="Xui" data-title-right="btns"
+				<a class="beautyCss3 centerRotateSide" data-title="Xui-btns"
 					href="https://xumengzi.github.io/beautyCss3Buttons/Css3Buttons.html" target="_blank"><code>Xui-btns</code></a>
 				<div class="content">
 					<p class="beautyCss3 borderToRight">基于<code>css3</code></p>
@@ -296,7 +370,7 @@
 		</div>
 		<div>
 			<div class="description">
-				<a class="beautyCss3 sideToCenter" data-title-left="selec" data-title-right="tedJs"
+				<a class="beautyCss3 horizontalRotate" data-title="selectedJs"
 					href="https://www.xumeng.ink/book/" target="_blank"><code>selectedJs</code></a>
 				<div class="content">
 					<p class="beautyCss3 centerToSide">基于原生<code>JS</code></p>
@@ -307,8 +381,8 @@
 		</div>
 		<div>
 			<div class="description">
-				<a class="beautyCss3 leftToRight" data-title="Anti-Hundred-Poison"
-					href="https://github.com/xumengzi/Anti-Hundred-Poison" target="_blank"><code>Anti-Hundred-Poison</code></a>
+				<a class="beautyCss3 leftToRight" data-title="anti-hundred-poison"
+					href="https://github.com/xumengzi/Anti-Hundred-Poison" target="_blank"><code>anti-hundred-poison</code></a>
 				<div class="content">
 					<p class="beautyCss3 leftInRightOut">基于原生<code>JS</code></p>
 					<p class="beautyCss3 leftInRightOut">可以屏蔽百度相关广告以及百家号</p>
